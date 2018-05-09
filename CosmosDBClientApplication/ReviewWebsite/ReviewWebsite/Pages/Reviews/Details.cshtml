@@ -1,0 +1,20 @@
+﻿@page "{id}"
+@model ReviewWebsite.Pages.Reviews.DetailsModel
+<h2>Details for review @Model.Review.Id </h2>
+<tr>
+    <td>
+        Id: @Model.Review.Id
+    </td>
+    <td>
+        Content: @Model.Review.Content
+    </td>
+    <td>
+        Evaluation: @Model.Review.Feedback
+    </td>
+    <td>
+        <form asp-page="/Reviews/Index" asp-page-handler="Delete" asp-route-id="@Model.Review.Id" method="post">
+            <input type="submit" value="Delete" class="btn btn-link" />
+        </form>
+    </td>
+</tr>
+<a asp-page="/Reviews/Index">Review List</a>

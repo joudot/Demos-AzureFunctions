@@ -1,0 +1,34 @@
+﻿@page "{handler?}/{id?}"
+@model ReviewWebsite.Pages.Reviews.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+
+<h2>List of Reviews </h2>
+<h3> @Model.Reviews.Count review(s) total</h3>
+
+<table class="table">
+    @foreach (var review in Model.Reviews)
+    {
+        <tr>
+            <td>
+                <a asp-page="/Reviews/Details" asp-route-id="@review.Id">Your review: @review.Content : @review.Feedback</a>
+            </td>
+            <td>
+                <form asp-page-handler="Delete" asp-route-id="@review.Id" method="post">
+                    <input type="submit" value="Delete" class="btn btn-link" />
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+<form asp-page-handler="Add" method="post">
+    <label asp-for="@Model.ReviewToAdd.Content">Type your review</label>
+    <input asp-for="@Model.ReviewToAdd.Content">
+    <span asp-validation-for="@Model.ReviewToAdd.Content"></span> <br />
+    <input type="submit" value="Add Review" class="btn btn-success" />
+</form><br />
+
+
