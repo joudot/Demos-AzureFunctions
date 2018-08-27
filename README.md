@@ -23,17 +23,32 @@ An Azure subscription with a Cosmos DB account containing a Review collection an
 
 ## Set up the demo
 
+First, clone the repository on your machine:
+```
+git clone: https://github.com/joudot/Demos-AzureFunctions
+```
 
 ### Function App
 
-Open the Azure Function App project and change the database name as well as the connection string to Cosmos DB
+Open the Azure Function App solution located at: .\Demos-AzureFunctions\AzureFunctionApp\ReviewEvaluationFunctionApp
 
-Change the TextAnalytics API initialization with your own subscription key and data center
+In local.settings.json, replace the AccountEndpoint and the AccountKey using the information of your Cosmos DB account
 
-Deploy the Function locally from Visual Studio
+In ReviewEvaluationFunction.cs:
+- Replace the database name and the collection name with existing database and collection in your Cosmos DB environment
+- Create a new collection named leases in your Cosmos DB environment. It will be used by the Change Feed listener
+- Replace your Subscription Key to be authorized to access the text analytics client. If you don't have any key, you can create a new "Text Analytics" resource in Azure. 
+You will also need to pay attention to the region since it is a parameter of the client in the Function Code. If you just want to test the Cosmos DB parts, just remove the API call to the Cognitive Service.
+To test that we actually process the document from the Azure function, you can hardcode the value of the review from the Function code. 
+
+Run the ReviewEvaluationFunction locally from Visual Studio and check that there is no issue connecting to the Cosmos Db collection we want to listen to.
 
 ### Cosmos DB Client Application
 
-Open the Cosmos DB Client application and change the databas name as well as the connection string to Cosmos DB
+Open the Cosmos DB Client solution .\CosmosDBClientApplication\ReviewWebsite
 
-Run the application from Visual Studio and add some reviews from the UI
+In appsettings.Development.json, replace the endpoint URL, authorization key, database name and collection name by the information retrieved from your Cosmos DB collection. 
+
+Run the Application and Add a review
+
+Refresh your browser. If the function was able to process the new review, the evaluation should be tagged as good or bad
