@@ -3,6 +3,6 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "AzureWebJobsDashboard": "UseDevelopmentStorage=true",
-    "CosmosDbConnectionString": "AccountEndpoint=https://joudot-single-partition.documents.azure.com:443/;AccountKey=7aEnkNXbumxO9Dz8608xllyMosN6YghYIphdeDeBRlLBjUKSHdAIrLpFrlbnoXlcg36Qw4q47Fs8syWcs9ejSQ==;"
+    "CosmosDbConnectionString": "AccountEndpoint=https://<COSMOSDB_ENV>.documents.azure.com:443/;AccountKey=<COSMOS_DB_ACCOUNT_KEY>;"
   }
 }
